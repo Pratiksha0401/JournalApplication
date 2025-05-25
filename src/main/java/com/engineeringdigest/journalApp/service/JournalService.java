@@ -3,6 +3,7 @@ package com.engineeringdigest.journalApp.service;
 
 import com.engineeringdigest.journalApp.entity.JournalEntity;
 import com.engineeringdigest.journalApp.repository.JournalRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class JournalService {
          journalRepository.save(journalEntity);
     }
 
-    public JournalEntity getJournalEntry(String id){
+    public JournalEntity getJournalEntry(ObjectId id){
         return journalRepository.findById(id).get();
     }
 
