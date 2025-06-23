@@ -1,5 +1,9 @@
 spring:
   application:
     name: JournalApp
-server:
-  port: 8000
+  config:
+    activate:
+      on-profile:
+        - dev
+#server:
+#  port: 8000
