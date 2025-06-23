@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: JournalApp
+server:
+  port: 8000
