@@ -1,9 +1,7 @@
 package com.demo.journalApp.service;
 
-import com.demo.journalApp.entity.JournalEntry;
 import com.demo.journalApp.entity.User;
 import com.demo.journalApp.repository.UserRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
@@ -14,27 +12,67 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 
-import static  org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
+/**
+ * Unit test class for {@link UserDetailsServiceImpl}.
+ *
+ * <p>This class uses Mockito to test the `loadUserByUsername` method in isolation,
+ * without starting the full Spring application context.</p>
+ *
+ * <p>Mocks the {@link UserRepository} to verify how the service behaves
+ * when a user is retrieved from the database.</p>
+ *
+ * <p>Active profile is set to "dev", which may be used to control configuration behavior
+ * during testing (e.g., property files, logging, etc.).</p>
+ */
 @ActiveProfiles("dev")
 public class UserDetailsServiceImplTests {
 
+    /**
+     * The service under test. Injected with mocked dependencies.
+     */
     @InjectMocks
     private UserDetailsServiceImpl userDetailsService;
 
+    /**
+     * Mocked user repository used to simulate database interaction.
+     */
     @Mock
     private UserRepository userRepository;
 
+    /**
+     * Initializes mocks before each test runs.
+     */
     @BeforeEach
-    void setUp(){
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Tests the {@code loadUserByUsername(String username)} method of {@link UserDetailsServiceImpl}.
+     *
+     * <p>This test is currently disabled using {@link Disabled} annotation. When enabled,
+     * it verifies that a valid {@link UserDetails} object is returned when the repository
+     * returns a valid user entity.</p>
+     *
+     * <p><strong>Mock behavior:</strong> Any username passed to the repository will return
+     * a user object with a static username and password.</p>
+     *
+     * <p><strong>Assertions:</strong> Checks that the returned UserDetails object is not null.</p>
+     */
     @Disabled
     @Test
-    void loadUserByUsernameTest(){
-        when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().userName("ram").password("inrinrick").roles(new ArrayList<>()).build());
+    void loadUserByUsernameTest() {
+        when(userRepository.findByUserName(ArgumentMatchers.anyString()))
+                .thenReturn(User.builder()
+                        .userName("ram")
+                        .password("inrinrick")
+                        .roles(new ArrayList<>())
+                        .build());
+
         UserDetails user = userDetailsService.loadUserByUsername("ram");
+
         Assertions.assertNotNull(user);
     }
 }
