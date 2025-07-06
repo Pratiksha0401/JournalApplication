@@ -14,18 +14,6 @@ import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
 
-/**
- * Unit test class for {@link UserDetailsServiceImpl}.
- *
- * <p>This class uses Mockito to test the `loadUserByUsername` method in isolation,
- * without starting the full Spring application context.</p>
- *
- * <p>Mocks the {@link UserRepository} to verify how the service behaves
- * when a user is retrieved from the database.</p>
- *
- * <p>Active profile is set to "dev", which may be used to control configuration behavior
- * during testing (e.g., property files, logging, etc.).</p>
- */
 @ActiveProfiles("dev")
 public class UserDetailsServiceImplTests {
 
